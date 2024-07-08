@@ -1,4 +1,5 @@
 const express = require("express");
+const cors =require("cors")
 const sequelize = require("sequelize");
 const dotenv = require("dotenv").config();
 const cookieParser = require("cookie-parser");
@@ -7,11 +8,14 @@ const userRoutes = require("./Routes/userRoutes");
 const newsletterRoutes = require('./Routes/newsRoutes');
 
 
+
+
 //setting up your port
 const PORT = process.env.PORT || 8080;
 
 //assigning the variable app to express
 const app = express();
+app.use(cors());
 
 //middleware
 app.use(express.json());
