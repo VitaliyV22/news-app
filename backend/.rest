@@ -1,8 +1,3 @@
-
-POST http://localhost:8080/api/users/login HTTP/1.1
-content-type: application/json
-
-{
-    "email": "test@gmail.com",
-    "password": "test123"
-}
+### Test Newsletter API with API Key
+GET http://localhost:8080/api/newsletter
+Authorization: 420149cca04345d08d90876bb33cfe71
