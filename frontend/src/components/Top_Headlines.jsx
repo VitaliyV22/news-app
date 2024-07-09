@@ -22,18 +22,19 @@ export const Top_Headlines = () => {
   }, []);
 
   const formatDate = (dateString) => {
-    return dateString.replace(/Z/, "");
+    const date = new Date(dateString);
+    return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
   };
 
   return (
     <div>
-      <h1 className="text-4xl px-5 py-4 font-bold ">The Latest</h1>
+      <h1 className="text-4xl px-5 py-4 font-bold">The Latest</h1>
       <div className="divider divider-info px-5"></div>
       {news.length > 0 ? (
         <ul className="flex flex-col gap-2 px-20">
           {news.map((item, index) => (
             <li
-              className=" lg:flex items-start  w-full p-5 gap-5 bg-base-300 rounded-lg shadow-xl"
+              className=" lg:flex items-start  w-full p-5 gap-5 bg-base-300 rounded-lg shadow-xl hover:opacity-90 hover:text-white hover:cursor-pointer"
               key={index}
             >
               <div className="avatar">
@@ -42,7 +43,7 @@ export const Top_Headlines = () => {
                 </div>
               </div>
               <div className="">
-                <h2 className="text-2xl font-semibold mb-5">{item.title}</h2>
+                <h2 className="text-3xl font-semibold mb-5">{item.title}</h2>
 
                 <p>{item.description}</p>
                 <div className="mt-32 text-sm">
