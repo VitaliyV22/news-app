@@ -26,12 +26,12 @@ const handleSubmit = (e) => {
 
 
   axios(configuration)
-    .then((result) => {
-      setRegister(true);
-    })
-    .catch((error) => {
-      error = new Error();
-    });
+  .then((result) => {
+    setRegister(true);
+  })
+  .catch((error) => {
+    error = new Error();
+  });
 };
 
   return (

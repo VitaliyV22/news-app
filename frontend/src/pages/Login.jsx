@@ -1,7 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 export const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [login, setLogin] = useState(false);
+
+  const handleSubmit = (e) => {
+    // prevent the form from refreshing the whole page
+    e.preventDefault();
+    // make a popup alert showing the "submitted" text
+    const configuration = {
+      method: "post",
+      url: "http://localhost:8080/api/users/login",
+      data: {
+        email,
+        password,
+      },
+    };
+    axios(configuration)
+      .then((result) => {
+        setLogin(true);
+      })
+      .catch((error) => {
+        error = new Error();
+      });
+  };
   return (
     <>
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
@@ -11,7 +37,8 @@ export const Login = () => {
           </h1>
 
           <form
-            action="submiy"
+            onClick={(e) => handleSubmit(e)}
+            action="submit"
             className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
           >
             <p className="text-center text-lg font-medium">
@@ -25,6 +52,8 @@ export const Login = () => {
 
               <div className="relative">
                 <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter email"
@@ -56,6 +85,8 @@ export const Login = () => {
 
               <div className="relative">
                 <input
+                   value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter password"
@@ -87,6 +118,7 @@ export const Login = () => {
             </div>
 
             <button
+              onClick={(e) => handleSubmit(e)}
               type="submit"
               className="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
             >
@@ -102,6 +134,11 @@ export const Login = () => {
           </form>
         </div>
       </div>
+      {login ? (
+          <p className="text-success">You Are Logged in Successfully</p>
+        ) : (
+          <p className="text-danger">You Are Not Logged in</p>
+        )}
     </>
   );
 };
